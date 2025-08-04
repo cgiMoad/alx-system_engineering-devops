@@ -1,17 +1,18 @@
 #!/bin/bash
+printf "%o\n" $(( $((5#$(echo $WATER | tr water 01234))) + $((5#$(echo $STIR | tr stir. 01234))) )) |tr 01234567 bestchol \
 
-# Step 1: Convert letters in WATER to digits 0–4 (base 5)
+
+# Convert WATER to base 5 number
 w=$(echo "$WATER" | tr 'water' '01234')
 
-# Step 2: Convert letters in STIR to digits 0–4 (base 5)
+# Convert STIR to base 5 number
 s=$(echo "$STIR" | tr 'stir.' '01234')
 
-# Step 3: Convert both base-5 strings to decimal and add
+# Add the two base 5 numbers (converted to decimal)
 sum=$((5#$w + 5#$s))
 
-# Step 4: Convert the sum to octal (base 8)
+# Convert the sum to octal (base 8)
 octal=$(printf "%o" "$sum")
 
-# Step 5: Convert the octal digits into letters using a mapping
-# 01234567 → bestchol
+# Translate octal digits to base bestchol
 echo "$octal" | tr '01234567' 'bestchol'
